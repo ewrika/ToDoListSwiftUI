@@ -75,4 +75,5 @@ CMD + U
 	4.	Поддержка синхронизации данных: Добавление механизма синхронизации данных между устройствами или с сервером.
 
 Задание: https://drive.google.com/file/d/1gnMv-2JgjXLwGUkmLear9VCZOR09k4j7/view
+
 Видео: https://youtube.com/shorts/WTDHosuKT8M?si=61BFMaxiy9iHaTNs
