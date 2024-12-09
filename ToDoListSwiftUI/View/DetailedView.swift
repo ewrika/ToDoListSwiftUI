@@ -45,6 +45,9 @@ struct DetailedView: View {
         }
     }
     func saveTask() {
+        if title == "" {
+            return 
+        }
         withAnimation {
             let newTask = task ?? TaskItem(context: viewContext)
             newTask.title = title

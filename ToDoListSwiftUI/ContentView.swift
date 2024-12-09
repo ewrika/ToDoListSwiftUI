@@ -24,13 +24,15 @@ struct ContentView: View {
                     MessagesSearchBar()
                     ForEach(tasks) { task in
                         let taskViewModel = TaskViewModel(context: viewContext)
-                        ToDoItemView(
-                            taskViewModel: taskViewModel, task: task,
-                            isCompleted: task.isCompleted,
-                            title: task.title ?? "Без названия",
-                            description: task.desc ?? "",
-                            date: task.created?.formatted(date: .abbreviated, time: .omitted) ?? "Без даты"
-                        )
+                        NavigationLink(destination: DetailedView(task: task)) {
+                            ToDoItemView(
+                                taskViewModel: taskViewModel, task: task,
+                                isCompleted: task.isCompleted,
+                                title: task.title ?? "Без названия",
+                                description: task.desc ?? "",
+                                date: task.created?.formatted(date: .abbreviated, time: .omitted) ?? "Без даты"
+                            )
+                        }.buttonStyle(PlainButtonStyle())
                         Divider()
                     }
                 }

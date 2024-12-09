@@ -44,13 +44,15 @@ struct ToDoItemView: View {
             
         }
         .contextMenu {
-            Button {
-                print("Редактировать задачу")
-                // Логика для редактирования
-            } label: {
-                Label("Редактировать", systemImage: "pencil")
+            NavigationLink(destination: DetailedView(task: task))
+            {
+                Button {
+                    print("Редактировать задачу")
+                    // Логика для редактирования
+                } label: {
+                    Label("Редактировать", systemImage: "pencil")
+                }
             }
-
             Button {
                 print("Поделиться задачей")
                 // Логика для шаринга
