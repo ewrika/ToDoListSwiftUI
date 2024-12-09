@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
     @FetchRequest(
         entity: TaskItem.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \TaskItem.created, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \TaskItem.created, ascending: false)],
         animation: .default
     )
     private var tasks: FetchedResults<TaskItem>

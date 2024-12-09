@@ -21,8 +21,10 @@ struct ToDoItemView: View {
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             Button(action: {
-                isCompleted.toggle()
-                taskViewModel.toggleCompletion(task)
+                Task {
+                    isCompleted.toggle()
+                    await taskViewModel.toggleCompletion(task)
+                }
             }) {
                 Image(systemName: isCompleted ? "checkmark.circle" : "circle")
                     .foregroundColor(isCompleted ? .yellow : .gray)
@@ -61,7 +63,9 @@ struct ToDoItemView: View {
             }
 
             Button(role: .destructive) {
-                deleteTask()
+                Task{
+                    await deleteTask()
+                }
             } label: {
                 Label("Удалить задачу", systemImage: "trash")
             }
@@ -75,12 +79,12 @@ struct ToDoItemView: View {
         .padding(.horizontal, 20)
     }
 
-    private func toggleCompletion() {
-        taskViewModel.toggleCompletion(task)
+    private func toggleCompletion() async {
+        await taskViewModel.toggleCompletion(task)
     }
 
-    private func deleteTask() {
-        taskViewModel.deleteTask(task)
+    private func deleteTask() async {
+        await taskViewModel.deleteTask(task)
     }
     
     private func shareTask() {

@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 import SwiftUI
-
+@MainActor
 class TaskViewModel: ObservableObject {
     private let context: NSManagedObjectContext
 
@@ -16,48 +16,55 @@ class TaskViewModel: ObservableObject {
 
     init(context: NSManagedObjectContext) {
         self.context = context
-        fetchTasks()
-    }
-
-    func fetchTasks() {
-        ToDoNetworkService.shared.fetchTasks(context: context) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let tasks):
-                    self.tasks = tasks
-                case .failure(let error):
-                    print("Ошибка загрузки задач: \(error.localizedDescription)")
-                }
-            }
+        Task {
+          await fetchTasks()
         }
     }
 
-    func addTask(title: String, description: String) {
-        let newTask = TaskItem(context: context)
-        newTask.title = title
-        newTask.desc = description
-        newTask.created = Date()
-
-        saveContext()
-        fetchTasks()
+    func fetchTasks() async {
+        do {
+            let fetchRequest: NSFetchRequest<TaskItem> = TaskItem.fetchRequest()
+            let tasks = try await context.perform { try self.context.fetch(fetchRequest) }
+            self.tasks = tasks
+        } catch {
+            print("Ошибка загрузки задач: \(error.localizedDescription)")
+        }
     }
 
-    func editTask(_ task: TaskItem, title: String, description: String) {
-        task.title = title
-        task.desc = description
-        saveContext()
-        fetchTasks()
+    func addTask(title: String, description: String) async {
+        await context.perform {
+            let newTask = TaskItem(context: self.context)
+            newTask.title = title
+            newTask.desc = description
+            newTask.created = Date()
+        }
+        await saveContext()
+        await fetchTasks()
     }
 
-    func deleteTask(_ task: TaskItem) {
-        context.delete(task)
-        saveContext()
-        fetchTasks()
+
+    func editTask(_ task: TaskItem, title: String, description: String) async {
+        await context.perform {
+            task.title = title
+            task.desc = description
+        }
+        await saveContext()
+        await fetchTasks()
     }
 
-    func toggleCompletion(_ task: TaskItem) {
-        task.isCompleted.toggle()
-        saveContext()
+    func deleteTask(_ task: TaskItem) async {
+        await context.perform {
+            self.context.delete(task)
+        }
+        await saveContext()
+        await fetchTasks()
+    }
+
+    func toggleCompletion(_ task: TaskItem) async {
+        await context.perform {
+            task.isCompleted.toggle()
+        }
+        await saveContext()
     }
     
     func shareTask(_ task: TaskItem, completion: @escaping (UIActivityViewController) -> Void) {
@@ -71,11 +78,13 @@ class TaskViewModel: ObservableObject {
         completion(activityController)
     }
 
-    private func saveContext() {
-        do {
-            try context.save()
-        } catch {
-            print("Ошибка при сохранении контекста: \(error.localizedDescription)")
+    private func saveContext() async {
+        await context.perform {
+            do {
+                try self.context.save()
+            } catch {
+                print("Ошибка при сохранении контекста: \(error.localizedDescription)")
+            }
         }
     }
 }
