@@ -37,7 +37,12 @@ struct ToDoItemView: View {
                     .opacity(0.5)
             }
             
-        }   .contextMenu {
+        } .swipeActions{
+            Button("Delete") {
+                
+            }
+        }
+        .contextMenu {
             Button {
                 print("Редактировать задачу ")
                 // Логика для редактирования

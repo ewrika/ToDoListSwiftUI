@@ -19,6 +19,10 @@
 		E8DCDDF22D06E47E00F0D6CE /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDDF12D06E47E00F0D6CE /* DetailedView.swift */; };
 		E8DCDDF72D06E8F300F0D6CE /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDDF52D06E8F300F0D6CE /* Model.xcdatamodeld */; };
 		E8DCDDF92D06E9FA00F0D6CE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDDF82D06E9FA00F0D6CE /* PersistenceController.swift */; };
+		E8DCDDFD2D06F7DC00F0D6CE /* SFProText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8DCDDFA2D06F7DC00F0D6CE /* SFProText-Regular.ttf */; };
+		E8DCDDFE2D06F7DC00F0D6CE /* SFProText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8DCDDFB2D06F7DC00F0D6CE /* SFProText-Bold.ttf */; };
+		E8DCDDFF2D06F7DC00F0D6CE /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */; };
+		E8DCDE022D0723A900F0D6CE /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDE012D0723A900F0D6CE /* TaskViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,11 @@
 		E8DCDDF12D06E47E00F0D6CE /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
 		E8DCDDF62D06E8F300F0D6CE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E8DCDDF82D06E9FA00F0D6CE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		E8DCDDFA2D06F7DC00F0D6CE /* SFProText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Regular.ttf"; sourceTree = "<group>"; };
+		E8DCDDFB2D06F7DC00F0D6CE /* SFProText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.ttf"; sourceTree = "<group>"; };
+		E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Medium.ttf"; sourceTree = "<group>"; };
+		E8DCDE002D06F7EB00F0D6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E8DCDE012D0723A900F0D6CE /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +76,7 @@
 		E8DCDDC52D06429800F0D6CE /* ToDoListSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				E8DCDE002D06F7EB00F0D6CE /* Info.plist */,
 				E8DCDDD72D06433200F0D6CE /* Extensions */,
 				E8DCDDD62D0642AF00F0D6CE /* ViewModel */,
 				E8DCDDD52D0642A900F0D6CE /* View */,
@@ -110,6 +120,7 @@
 		E8DCDDD62D0642AF00F0D6CE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8DCDE012D0723A900F0D6CE /* TaskViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -118,6 +129,9 @@
 			isa = PBXGroup;
 			children = (
 				E8DCDDD82D06434200F0D6CE /* fonts */,
+				E8DCDDFB2D06F7DC00F0D6CE /* SFProText-Bold.ttf */,
+				E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */,
+				E8DCDDFA2D06F7DC00F0D6CE /* SFProText-Regular.ttf */,
 				E8DCDDED2D06E43100F0D6CE /* Constants.swift */,
 				E8DCDDEF2D06E44E00F0D6CE /* Extensions.swift */,
 			);
@@ -190,7 +204,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8DCDDCE2D06429A00F0D6CE /* Preview Assets.xcassets in Resources */,
+				E8DCDDFD2D06F7DC00F0D6CE /* SFProText-Regular.ttf in Resources */,
 				E8DCDDCB2D06429A00F0D6CE /* Assets.xcassets in Resources */,
+				E8DCDDFE2D06F7DC00F0D6CE /* SFProText-Bold.ttf in Resources */,
+				E8DCDDFF2D06F7DC00F0D6CE /* SFProText-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8DCDE022D0723A900F0D6CE /* TaskViewModel.swift in Sources */,
 				E8DCDDC92D06429800F0D6CE /* ContentView.swift in Sources */,
 				E8DCDDEA2D06E38B00F0D6CE /* ToDoItemView.swift in Sources */,
 				E8DCDDC72D06429800F0D6CE /* ToDoListSwiftUIApp.swift in Sources */,
@@ -347,6 +365,7 @@
 				DEVELOPMENT_TEAM = 36N72Y7M5U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoListSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -376,6 +395,7 @@
 				DEVELOPMENT_TEAM = 36N72Y7M5U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoListSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

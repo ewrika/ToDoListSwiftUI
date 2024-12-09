@@ -24,9 +24,7 @@ struct FooterView: View {
 
                 Spacer()
 
-                Button(action: {
-                    
-                }) {
+                NavigationLink(destination: DetailedView()) {
                     Image(systemName: "square.and.pencil")
                         .foregroundColor(.figmaYellow)
                         .font(.system(size: 22))

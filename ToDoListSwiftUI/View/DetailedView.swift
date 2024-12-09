@@ -8,23 +8,15 @@
 import SwiftUI
 
 struct DetailedView: View {
-    @State private var title: String = "Заняться спортом"
-    @State private var description: String = "Составить список необходимых продуктов для ужина. Не забыть проверить, что уже есть в холодильнике."
-
+    @State private var title: String = ""
+    @State private var description: String = ""
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) private var presentationMode
+    
+    var task: TaskItem?
     var body: some View {
 
         VStack(alignment: .leading, spacing: 16) {
-            // Пока не решил как правильно реализовать
-            Button(action: {
-
-             }) {
-                 HStack {
-                     Image(systemName: "arrow.left")
-                     Text("Назад")
-                 }
-                 .foregroundColor(.yellow)
-             }
-
             TextField("Заголовок", text: $title)
                .font(.Bold34)
                 .fontWeight(.bold)
@@ -39,8 +31,31 @@ struct DetailedView: View {
                 .foregroundColor(.primary)
                 .font(.Regular16)
                 .padding(.horizontal, -4)
-        }
+        } 
         .padding()
+        .onAppear {
+            if let task = task {
+                // Если задача существует, заполняем данные
+                title = task.title ?? ""
+                description = task.desc ?? ""
+            }
+        }
+        .onDisappear {
+            saveTask()
+        }
+    }
+    func saveTask() {
+        withAnimation {
+            let newTask = task ?? TaskItem(context: viewContext)
+            newTask.title = title
+            newTask.desc = description
+            newTask.created = Date()
+            do {
+                try viewContext.save()
+            } catch {
+                print("Ошибка при сохранении задачи: \(error.localizedDescription)")
+            }
+        }
     }
 }
 
