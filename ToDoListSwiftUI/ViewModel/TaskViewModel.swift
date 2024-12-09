@@ -22,12 +22,15 @@ class TaskViewModel: ObservableObject {
     }
 
     func fetchTasks() async {
-        do {
-            let fetchRequest: NSFetchRequest<TaskItem> = TaskItem.fetchRequest()
-            let tasks = try await context.perform { try self.context.fetch(fetchRequest) }
-            self.tasks = tasks
-        } catch {
-            print("Ошибка загрузки задач: \(error.localizedDescription)")
+        ToDoNetworkService.shared.fetchTasks(context: context) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let tasks):
+                    self.tasks = tasks
+                case .failure(let error):
+                    print("Ошибка загрузки задач: \(error.localizedDescription)")
+                }
+            }
         }
     }
 
@@ -42,8 +45,8 @@ class TaskViewModel: ObservableObject {
         await fetchTasks()
     }
 
-
     func editTask(_ task: TaskItem, title: String, description: String) async {
+        print("Редактируем задачу: \(task.title ?? "Без названия")")
         await context.perform {
             task.title = title
             task.desc = description
@@ -53,6 +56,7 @@ class TaskViewModel: ObservableObject {
     }
 
     func deleteTask(_ task: TaskItem) async {
+        print("Удаляем задачу: \(task.title ?? "Без названия")")
         await context.perform {
             self.context.delete(task)
         }
@@ -61,19 +65,21 @@ class TaskViewModel: ObservableObject {
     }
 
     func toggleCompletion(_ task: TaskItem) async {
+        print("Переключаем статус выполнения задачи: \(task.title ?? "Без названия")")
         await context.perform {
             task.isCompleted.toggle()
         }
         await saveContext()
     }
-    
+
     func shareTask(_ task: TaskItem, completion: @escaping (UIActivityViewController) -> Void) {
+        print("Поделились задачей: \(task.title ?? "Без названия")")
         let shareContent = """
         \(task.title ?? "Без названия")
 
         \(task.desc ?? "Без описания")
         """
-        
+
         let activityController = UIActivityViewController(activityItems: [shareContent], applicationActivities: nil)
         completion(activityController)
     }
@@ -83,7 +89,7 @@ class TaskViewModel: ObservableObject {
             do {
                 try self.context.save()
             } catch {
-                print("Ошибка при сохранении контекста: \(error.localizedDescription)")
+                print("Ошибка при сохранении : \(error.localizedDescription)")
             }
         }
     }

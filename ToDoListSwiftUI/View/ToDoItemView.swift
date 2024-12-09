@@ -63,18 +63,20 @@ struct ToDoItemView: View {
             }
 
             Button(role: .destructive) {
-                Task{
+                Task {
                     await deleteTask()
                 }
             } label: {
                 Label("Удалить задачу", systemImage: "trash")
             }
         }
-        .sheet(isPresented: $isSharing, content: {
-              if let activityController = activityController {
-                  ShareSheetWrapper(activityController: activityController)
-              }
-          })
+        .sheet(isPresented: $isSharing) {
+            if let activityController = activityController {
+                ShareSheetWrapper(activityController: activityController)
+            } else {
+                Text("Нет данных для шаринга")
+            }
+        }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(.horizontal, 20)
     }
@@ -86,16 +88,15 @@ struct ToDoItemView: View {
     private func deleteTask() async {
         await taskViewModel.deleteTask(task)
     }
-    
+
     private func shareTask() {
         taskViewModel.shareTask(task) { activityController in
             self.activityController = activityController
             self.isSharing = true
         }
     }
-    
-}
 
+}
 
 struct ShareSheetWrapper: UIViewControllerRepresentable {
     let activityController: UIActivityViewController
