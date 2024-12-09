@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ToDoItemView: View {
     @State var isCompleted: Bool
-
+    let title: String
+    let description: String
+    let date: String
+    
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             Button(action: {
@@ -21,20 +24,20 @@ struct ToDoItemView: View {
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                Text("task.title")
-                    .font(.headline)
+                Text(title)
+                    .font(.Medium16)
                     .strikethrough(isCompleted, color: .gray)
                     .opacity(isCompleted ? 0.5 : 1.0)
-                Text("task.description")
+                Text(description)
                     .lineLimit(2)
-                    .font(.subheadline)
+                    .font(.Regular12)
                     .opacity(isCompleted ? 0.5 : 1.0)
-                Text("task.date.formattedShort()")
-                    .font(.footnote)
+                Text(date)
+                    .font(.Regular12)
                     .opacity(0.5)
             }
             
-        }            .contextMenu {
+        }   .contextMenu {
             Button {
                 print("Редактировать задачу ")
                 // Логика для редактирования
@@ -60,5 +63,21 @@ struct ToDoItemView: View {
 }
 
 #Preview {
-    ToDoItemView(isCompleted: false)
+    VStack(spacing: 20) {
+        // Пример выполненной задачи
+        ToDoItemView(
+            isCompleted: true, title: "Почитать Книгу",
+            description: "Составить список необходимых продуктов для ужина. Не забыть проверить, что уже есть в холодильнике.",
+            date: "09/10/24"
+        )
+
+        // Пример невыполненной задачи
+        ToDoItemView(
+            isCompleted: false, title: "Сделать уборку",
+            description: "Навести порядок в комнате, расставить книги и протереть пыль.",
+            date: "09/10/24"
+        )
+
+    }
+    .padding()
 }

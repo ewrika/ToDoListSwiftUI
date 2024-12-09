@@ -9,16 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+                VStack {
+                    ScrollView {
+
+                        MessagesSearchBar()
+
+                        ToDoItemView(isCompleted: false, title: "dsa", description: "ds", date: "21042003")
+                            Divider()
+                        
+                    }
+                    FooterView(taskCount:7)
+                }
+            .navigationTitle("Задачи")
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .preferredColorScheme(.dark)
+
 }
