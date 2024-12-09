@@ -13,7 +13,6 @@ class TaskViewModel: ObservableObject {
     private let context: NSManagedObjectContext
 
     @Published var tasks: [TaskItem] = []
-    @Published var searchText = ""
 
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -21,11 +20,15 @@ class TaskViewModel: ObservableObject {
     }
 
     func fetchTasks() {
-        let request: NSFetchRequest<TaskItem> = TaskItem.fetchRequest()
-        do {
-            tasks = try context.fetch(request)
-        } catch {
-            print("Ошибка при получении задач: \(error.localizedDescription)")
+        ToDoNetworkService.shared.fetchTasks(context: context) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let tasks):
+                    self.tasks = tasks
+                case .failure(let error):
+                    print("Ошибка загрузки задач: \(error.localizedDescription)")
+                }
+            }
         }
     }
 

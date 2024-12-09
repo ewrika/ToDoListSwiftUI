@@ -24,6 +24,7 @@
 		E8DCDDFF2D06F7DC00F0D6CE /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */; };
 		E8DCDE022D0723A900F0D6CE /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDE012D0723A900F0D6CE /* TaskViewModel.swift */; };
 		E8DCDE062D07366400F0D6CE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E8DCDE052D07366400F0D6CE /* Alamofire */; };
+		E8DCDE0D2D07391300F0D6CE /* ToDoNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDE0C2D07391300F0D6CE /* ToDoNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Medium.ttf"; sourceTree = "<group>"; };
 		E8DCDE002D06F7EB00F0D6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E8DCDE012D0723A900F0D6CE /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		E8DCDE0C2D07391300F0D6CE /* ToDoNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		E8DCDE032D07356400F0D6CE /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				E8DCDE0C2D07391300F0D6CE /* ToDoNetworkService.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				E8DCDDC92D06429800F0D6CE /* ContentView.swift in Sources */,
 				E8DCDDEA2D06E38B00F0D6CE /* ToDoItemView.swift in Sources */,
 				E8DCDDC72D06429800F0D6CE /* ToDoListSwiftUIApp.swift in Sources */,
+				E8DCDE0D2D07391300F0D6CE /* ToDoNetworkService.swift in Sources */,
 				E8DCDDEC2D06E3FE00F0D6CE /* FooterView.swift in Sources */,
 				E8DCDDF22D06E47E00F0D6CE /* DetailedView.swift in Sources */,
 				E8DCDDF72D06E8F300F0D6CE /* Model.xcdatamodeld in Sources */,
