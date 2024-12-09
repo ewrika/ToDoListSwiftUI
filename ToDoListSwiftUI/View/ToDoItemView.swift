@@ -11,7 +11,8 @@ struct ToDoItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var taskViewModel: TaskViewModel
     let task: TaskItem
-
+    @State private var activityController: UIActivityViewController?
+    @State private var isSharing = false
     @State var isCompleted: Bool
     let title: String
     let description: String
@@ -54,7 +55,7 @@ struct ToDoItemView: View {
             }
             Button {
                 print("Поделиться задачей")
-                // Логика для шаринга
+                shareTask()
             } label: {
                 Label("Поделиться", systemImage: "square.and.arrow.up")
             }
@@ -65,6 +66,11 @@ struct ToDoItemView: View {
                 Label("Удалить задачу", systemImage: "trash")
             }
         }
+        .sheet(isPresented: $isSharing, content: {
+              if let activityController = activityController {
+                  ShareSheetWrapper(activityController: activityController)
+              }
+          })
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(.horizontal, 20)
     }
@@ -76,4 +82,23 @@ struct ToDoItemView: View {
     private func deleteTask() {
         taskViewModel.deleteTask(task)
     }
+    
+    private func shareTask() {
+        taskViewModel.shareTask(task) { activityController in
+            self.activityController = activityController
+            self.isSharing = true
+        }
+    }
+    
+}
+
+
+struct ShareSheetWrapper: UIViewControllerRepresentable {
+    let activityController: UIActivityViewController
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        activityController
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }

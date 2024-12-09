@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class TaskViewModel: ObservableObject {
     private let context: NSManagedObjectContext
@@ -54,6 +55,17 @@ class TaskViewModel: ObservableObject {
     func toggleCompletion(_ task: TaskItem) {
         task.isCompleted.toggle()
         saveContext()
+    }
+    
+    func shareTask(_ task: TaskItem, completion: @escaping (UIActivityViewController) -> Void) {
+        let shareContent = """
+        \(task.title ?? "Без названия")
+
+        \(task.desc ?? "Без описания")
+        """
+        
+        let activityController = UIActivityViewController(activityItems: [shareContent], applicationActivities: nil)
+        completion(activityController)
     }
 
     private func saveContext() {
