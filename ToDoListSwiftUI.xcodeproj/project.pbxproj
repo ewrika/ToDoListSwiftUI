@@ -23,6 +23,7 @@
 		E8DCDDFE2D06F7DC00F0D6CE /* SFProText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8DCDDFB2D06F7DC00F0D6CE /* SFProText-Bold.ttf */; };
 		E8DCDDFF2D06F7DC00F0D6CE /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */; };
 		E8DCDE022D0723A900F0D6CE /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDE012D0723A900F0D6CE /* TaskViewModel.swift */; };
+		E8DCDE062D07366400F0D6CE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E8DCDE052D07366400F0D6CE /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8DCDE062D07366400F0D6CE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +169,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				E8DCDE0B2D07368F00F0D6CE /* PBXTargetDependency */,
 			);
 			name = ToDoListSwiftUI;
+			packageProductDependencies = (
+				E8DCDE052D07366400F0D6CE /* Alamofire */,
+			);
 			productName = ToDoListSwiftUI;
 			productReference = E8DCDDC32D06429800F0D6CE /* ToDoListSwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -197,6 +203,10 @@
 				Base,
 			);
 			mainGroup = E8DCDDBA2D06429800F0D6CE;
+			packageReferences = (
+				E8DCDE042D07366400F0D6CE /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E8DCDE092D07366E00F0D6CE /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			productRefGroup = E8DCDDC42D06429800F0D6CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -241,6 +251,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E8DCDE0B2D07368F00F0D6CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = E8DCDE0A2D07368F00F0D6CE /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E8DCDDCF2D06429A00F0D6CE /* Debug */ = {
@@ -444,6 +461,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E8DCDE042D07366400F0D6CE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		E8DCDE092D07366E00F0D6CE /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E8DCDE052D07366400F0D6CE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8DCDE042D07366400F0D6CE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		E8DCDE0A2D07368F00F0D6CE /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8DCDE092D07366E00F0D6CE /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E8DCDDF52D06E8F300F0D6CE /* Model.xcdatamodeld */ = {

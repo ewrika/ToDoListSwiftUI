@@ -12,7 +12,7 @@ struct DetailedView: View {
     @State private var description: String = ""
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) private var presentationMode
-    
+
     var task: TaskItem?
     var body: some View {
 
@@ -31,7 +31,7 @@ struct DetailedView: View {
                 .foregroundColor(.primary)
                 .font(.Regular16)
                 .padding(.horizontal, -4)
-        } 
+        }
         .padding()
         .onAppear {
             if let task = task {
@@ -46,7 +46,7 @@ struct DetailedView: View {
     }
     func saveTask() {
         if title == "" {
-            return 
+            return
         }
         withAnimation {
             let newTask = task ?? TaskItem(context: viewContext)
@@ -65,4 +65,3 @@ struct DetailedView: View {
 #Preview {
     DetailedView()
 }
-

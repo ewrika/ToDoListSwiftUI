@@ -13,15 +13,15 @@ struct ContentView: View {
         entity: TaskItem.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskItem.created, ascending: true)],
         animation: .default
-    ) 
+    )
     private var tasks: FetchedResults<TaskItem>
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     @State private var searchText = ""
-    
+
     var filteredTasks: [TaskItem] {
         if searchText.isEmpty {
-            return Array(tasks) 
+            return Array(tasks)
         } else {
             return tasks.filter { task in
                 (task.title?.lowercased().contains(searchText.lowercased()) ?? false) ||
@@ -29,7 +29,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -55,7 +55,3 @@ struct ContentView: View {
         }
     }
 }
-
-
-
-

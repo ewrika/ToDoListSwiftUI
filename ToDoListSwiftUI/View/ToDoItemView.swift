@@ -11,12 +11,12 @@ struct ToDoItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var taskViewModel: TaskViewModel
     let task: TaskItem
-    
+
     @State var isCompleted: Bool
     let title: String
     let description: String
     let date: String
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             Button(action: {
@@ -41,14 +41,13 @@ struct ToDoItemView: View {
                     .font(.Regular12)
                     .opacity(0.5)
             }
-            
+
         }
         .contextMenu {
-            NavigationLink(destination: DetailedView(task: task))
-            {
+            NavigationLink(destination: DetailedView(task: task)) {
                 Button {
                     print("Редактировать задачу")
-                    // Логика для редактирования
+
                 } label: {
                     Label("Редактировать", systemImage: "pencil")
                 }
@@ -69,7 +68,7 @@ struct ToDoItemView: View {
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(.horizontal, 20)
     }
-    
+
     private func toggleCompletion() {
         taskViewModel.toggleCompletion(task)
     }

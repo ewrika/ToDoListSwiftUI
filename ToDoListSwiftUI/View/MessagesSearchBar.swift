@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MessagesSearchBar: View {
-    @Binding var searchText:String
+    @Binding var searchText: String
   var body: some View {
     HStack {
       Image(systemName: "magnifyingglass")
@@ -37,4 +37,3 @@ struct TrailingIcon: ViewModifier {
     }
  }
 }
-
