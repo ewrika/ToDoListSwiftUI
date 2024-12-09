@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ToDoItemView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var taskViewModel: TaskViewModel
+    let task: TaskItem
+    
     @State var isCompleted: Bool
     let title: String
     let description: String
@@ -17,6 +21,7 @@ struct ToDoItemView: View {
         HStack(alignment: .top, spacing: 8) {
             Button(action: {
                 isCompleted.toggle()
+                taskViewModel.toggleCompletion(task)
             }) {
                 Image(systemName: isCompleted ? "checkmark.circle" : "circle")
                     .foregroundColor(isCompleted ? .yellow : .gray)
@@ -37,14 +42,10 @@ struct ToDoItemView: View {
                     .opacity(0.5)
             }
             
-        } .swipeActions{
-            Button("Delete") {
-                
-            }
         }
         .contextMenu {
             Button {
-                print("Редактировать задачу ")
+                print("Редактировать задачу")
                 // Логика для редактирования
             } label: {
                 Label("Редактировать", systemImage: "pencil")
@@ -58,31 +59,20 @@ struct ToDoItemView: View {
             }
 
             Button(role: .destructive) {
-  
+                deleteTask()
             } label: {
                 Label("Удалить задачу", systemImage: "trash")
             }
-        }.frame(maxWidth: .infinity, alignment: .topLeading)
+        }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(.horizontal, 20)
     }
-}
-
-#Preview {
-    VStack(spacing: 20) {
-        // Пример выполненной задачи
-        ToDoItemView(
-            isCompleted: true, title: "Почитать Книгу",
-            description: "Составить список необходимых продуктов для ужина. Не забыть проверить, что уже есть в холодильнике.",
-            date: "09/10/24"
-        )
-
-        // Пример невыполненной задачи
-        ToDoItemView(
-            isCompleted: false, title: "Сделать уборку",
-            description: "Навести порядок в комнате, расставить книги и протереть пыль.",
-            date: "09/10/24"
-        )
-
+    
+    private func toggleCompletion() {
+        taskViewModel.toggleCompletion(task)
     }
-    .padding()
+
+    private func deleteTask() {
+        taskViewModel.deleteTask(task)
+    }
 }

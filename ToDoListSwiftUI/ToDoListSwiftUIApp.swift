@@ -16,7 +16,7 @@ struct ToDoListSwiftUIApp: App {
             let context = persistenceController.container.viewContext
             let taskViewModel = TaskViewModel(context: context) // Создаем ViewModel
 
-            ContentView(taskViewModel: taskViewModel) // Передаем ViewModel
+            ContentView() // Передаем ViewModel
                 .environment(\.managedObjectContext, context)
         }
     }

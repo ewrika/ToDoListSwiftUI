@@ -9,26 +9,23 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @StateObject private var taskViewModel: TaskViewModel
-
     @FetchRequest(
         entity: TaskItem.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskItem.created, ascending: true)],
         animation: .default
-    ) private var tasks: FetchedResults<TaskItem>
-
-    init(taskViewModel: TaskViewModel) {
-        _taskViewModel = StateObject(wrappedValue: taskViewModel)
-    }
+    ) 
+    private var tasks: FetchedResults<TaskItem>
+    @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         NavigationStack {
             VStack {
                 ScrollView {
                     MessagesSearchBar()
-                    // Отображение задач
                     ForEach(tasks) { task in
+                        let taskViewModel = TaskViewModel(context: viewContext)
                         ToDoItemView(
+                            taskViewModel: taskViewModel, task: task,
                             isCompleted: task.isCompleted,
                             title: task.title ?? "Без названия",
                             description: task.desc ?? "",
@@ -43,6 +40,7 @@ struct ContentView: View {
         }
     }
 }
+
 
 
 

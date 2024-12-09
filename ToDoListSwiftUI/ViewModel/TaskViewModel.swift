@@ -18,8 +18,6 @@ class TaskViewModel: ObservableObject {
         fetchTasks()
     }
 
-    
-
     func fetchTasks() {
         let request: NSFetchRequest<TaskItem> = TaskItem.fetchRequest()
         do {
@@ -50,6 +48,11 @@ class TaskViewModel: ObservableObject {
         context.delete(task)
         saveContext()
         fetchTasks()
+    }
+
+    func toggleCompletion(_ task: TaskItem) {
+        task.isCompleted.toggle()
+        saveContext()
     }
 
     private func saveContext() {
