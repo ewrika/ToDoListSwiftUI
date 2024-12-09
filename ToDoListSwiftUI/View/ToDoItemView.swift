@@ -63,7 +63,7 @@ struct ToDoItemView: View {
             }
 
             Button(role: .destructive) {
-                Task{
+                Task {
                     await deleteTask()
                 }
             } label: {
@@ -86,16 +86,15 @@ struct ToDoItemView: View {
     private func deleteTask() async {
         await taskViewModel.deleteTask(task)
     }
-    
+
     private func shareTask() {
         taskViewModel.shareTask(task) { activityController in
             self.activityController = activityController
             self.isSharing = true
         }
     }
-    
-}
 
+}
 
 struct ShareSheetWrapper: UIViewControllerRepresentable {
     let activityController: UIActivityViewController
