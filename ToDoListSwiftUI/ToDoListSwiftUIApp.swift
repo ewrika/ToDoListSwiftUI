@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct ToDoListSwiftUIApp: App {
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let context = persistenceController.container.viewContext
+            let taskViewModel = TaskViewModel(context: context) // Создаем ViewModel
+
+            ContentView() // Передаем ViewModel
+                .environment(\.managedObjectContext, context)
         }
     }
 }
