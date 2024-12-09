@@ -70,11 +70,13 @@ struct ToDoItemView: View {
                 Label("Удалить задачу", systemImage: "trash")
             }
         }
-        .sheet(isPresented: $isSharing, content: {
-              if let activityController = activityController {
-                  ShareSheetWrapper(activityController: activityController)
-              }
-          })
+        .sheet(isPresented: $isSharing) {
+            if let activityController = activityController {
+                ShareSheetWrapper(activityController: activityController)
+            } else {
+                Text("Нет данных для шаринга")
+            }
+        }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(.horizontal, 20)
     }
