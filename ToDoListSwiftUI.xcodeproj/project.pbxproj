@@ -76,6 +76,7 @@
 		E8DCDDC52D06429800F0D6CE /* ToDoListSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				E8DCDE032D07356400F0D6CE /* Manager */,
 				E8DCDE002D06F7EB00F0D6CE /* Info.plist */,
 				E8DCDDD72D06433200F0D6CE /* Extensions */,
 				E8DCDDD62D0642AF00F0D6CE /* ViewModel */,
@@ -143,6 +144,13 @@
 			children = (
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		E8DCDE032D07356400F0D6CE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

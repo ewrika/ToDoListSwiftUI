@@ -12,6 +12,7 @@ class TaskViewModel: ObservableObject {
     private let context: NSManagedObjectContext
 
     @Published var tasks: [TaskItem] = []
+    @Published var searchText = ""
 
     init(context: NSManagedObjectContext) {
         self.context = context

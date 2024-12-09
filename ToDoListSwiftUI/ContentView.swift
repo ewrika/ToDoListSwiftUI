@@ -16,13 +16,26 @@ struct ContentView: View {
     ) 
     private var tasks: FetchedResults<TaskItem>
     @Environment(\.managedObjectContext) private var viewContext
-
+    
+    @State private var searchText = ""
+    
+    var filteredTasks: [TaskItem] {
+        if searchText.isEmpty {
+            return Array(tasks) 
+        } else {
+            return tasks.filter { task in
+                (task.title?.lowercased().contains(searchText.lowercased()) ?? false) ||
+                (task.desc?.lowercased().contains(searchText.lowercased()) ?? false)
+            }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
                 ScrollView {
-                    MessagesSearchBar()
-                    ForEach(tasks) { task in
+                    MessagesSearchBar(searchText: $searchText)
+                    ForEach(filteredTasks) { task in
                         let taskViewModel = TaskViewModel(context: viewContext)
                         NavigationLink(destination: DetailedView(task: task)) {
                             ToDoItemView(
