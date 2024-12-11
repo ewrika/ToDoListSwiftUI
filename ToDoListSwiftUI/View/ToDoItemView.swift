@@ -11,12 +11,8 @@ struct ToDoItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var taskViewModel: TaskViewModel
     let task: TaskItem
-    @State private var activityController: UIActivityViewController?
-    @State private var isSharing = false
     @State var isCompleted: Bool
-    let title: String
-    let description: String
-    let date: String
+    let data: ToDoItemData
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -32,15 +28,15 @@ struct ToDoItemView: View {
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                Text(title)
+                Text(data.title)
                     .font(.Medium16)
                     .strikethrough(isCompleted, color: .gray)
                     .opacity(isCompleted ? 0.5 : 1.0)
-                Text(description)
+                Text(data.description)
                     .lineLimit(2)
                     .font(.Regular12)
                     .opacity(isCompleted ? 0.5 : 1.0)
-                Text(date)
+                Text(data.date)
                     .font(.Regular12)
                     .opacity(0.5)
             }
@@ -55,12 +51,9 @@ struct ToDoItemView: View {
                     Label("Редактировать", systemImage: "pencil")
                 }
             }
-            Button {
-                print("Поделиться задачей")
-                shareTask()
-            } label: {
-                Label("Поделиться", systemImage: "square.and.arrow.up")
-            }
+            ShareLink(item: shareContent(), label: {
+                           Label("Поделиться", systemImage: "square.and.arrow.up")
+                       })
 
             Button(role: .destructive) {
                 Task {
@@ -68,13 +61,6 @@ struct ToDoItemView: View {
                 }
             } label: {
                 Label("Удалить задачу", systemImage: "trash")
-            }
-        }
-        .sheet(isPresented: $isSharing) {
-            if let activityController = activityController {
-                ShareSheetWrapper(activityController: activityController)
-            } else {
-                Text("Нет данных для шаринга")
             }
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -89,21 +75,12 @@ struct ToDoItemView: View {
         await taskViewModel.deleteTask(task)
     }
 
-    private func shareTask() {
-        taskViewModel.shareTask(task) { activityController in
-            self.activityController = activityController
-            self.isSharing = true
-        }
+    private func shareContent() -> String {
+        """
+        \(data.title)
+
+        \(data.description)
+        """
     }
 
-}
-
-struct ShareSheetWrapper: UIViewControllerRepresentable {
-    let activityController: UIActivityViewController
-
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        activityController
-    }
-
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }

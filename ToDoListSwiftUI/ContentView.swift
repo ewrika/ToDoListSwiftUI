@@ -16,7 +16,7 @@ struct ContentView: View {
     )
     private var tasks: FetchedResults<TaskItem>
     @Environment(\.managedObjectContext) private var viewContext
-
+    @StateObject private var viewModel = TaskViewModel(context: PersistenceController.shared.container.viewContext)
     @State private var searchText = ""
 
     var filteredTasks: [TaskItem] {
@@ -36,20 +36,28 @@ struct ContentView: View {
                 ScrollView {
                     MessagesSearchBar(searchText: $searchText)
                     ForEach(filteredTasks) { task in
-                        let taskViewModel = TaskViewModel(context: viewContext)
+                        let taskData = ToDoItemData(
+                            title: task.title ?? "Без названия",
+                            description: task.desc ?? "Без описания",
+                            date: task.created?.formatted(date: .abbreviated, time: .omitted) ?? "Без даты"
+                        )
                         NavigationLink(destination: DetailedView(task: task)) {
                             ToDoItemView(
-                                taskViewModel: taskViewModel, task: task,
+                                taskViewModel: viewModel,
+                                task: task,
                                 isCompleted: task.isCompleted,
-                                title: task.title ?? "Без названия",
-                                description: task.desc ?? "",
-                                date: task.created?.formatted(date: .abbreviated, time: .omitted) ?? "Без даты"
+                                data: taskData
                             )
-                        }.buttonStyle(PlainButtonStyle())
+                        }
+                        .buttonStyle(PlainButtonStyle())
                         Divider()
                     }
                 }
                 FooterView(taskCount: tasks.count)
+            }.onAppear {
+                Task {
+                    await viewModel.fetchTasks()
+                }
             }
             .navigationTitle("Задачи")
         }
