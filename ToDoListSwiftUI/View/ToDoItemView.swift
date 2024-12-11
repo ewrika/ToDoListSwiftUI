@@ -11,12 +11,8 @@ struct ToDoItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var taskViewModel: TaskViewModel
     let task: TaskItem
-    @State private var activityController: UIActivityViewController?
-    @State private var isSharing = false
     @State var isCompleted: Bool
-    let title: String
-    let description: String
-    let date: String
+    let data: ToDoItemData
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -32,15 +28,15 @@ struct ToDoItemView: View {
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                Text(title)
+                Text(data.title)
                     .font(.Medium16)
                     .strikethrough(isCompleted, color: .gray)
                     .opacity(isCompleted ? 0.5 : 1.0)
-                Text(description)
+                Text(data.description)
                     .lineLimit(2)
                     .font(.Regular12)
                     .opacity(isCompleted ? 0.5 : 1.0)
-                Text(date)
+                Text(data.date)
                     .font(.Regular12)
                     .opacity(0.5)
             }
@@ -81,12 +77,10 @@ struct ToDoItemView: View {
 
     private func shareContent() -> String {
         """
-        \(title)
+        \(data.title)
 
-        \(description)
+        \(data.description)
         """
     }
 
 }
-
-
