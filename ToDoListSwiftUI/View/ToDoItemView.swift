@@ -55,12 +55,9 @@ struct ToDoItemView: View {
                     Label("Редактировать", systemImage: "pencil")
                 }
             }
-            Button {
-                print("Поделиться задачей")
-                
-            } label: {
-                Label("Поделиться", systemImage: "square.and.arrow.up")
-            }
+            ShareLink(item: shareContent(), label: {
+                           Label("Поделиться", systemImage: "square.and.arrow.up")
+                       })
 
             Button(role: .destructive) {
                 Task {
@@ -68,13 +65,6 @@ struct ToDoItemView: View {
                 }
             } label: {
                 Label("Удалить задачу", systemImage: "trash")
-            }
-        }
-        .sheet(isPresented: $isSharing) {
-            if let activityController = activityController {
-                ShareSheetWrapper(activityController: activityController)
-            } else {
-                Text("Нет данных для шаринга")
             }
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -89,15 +79,14 @@ struct ToDoItemView: View {
         await taskViewModel.deleteTask(task)
     }
 
+    private func shareContent() -> String {
+        """
+        \(title)
 
-}
-
-struct ShareSheetWrapper: UIViewControllerRepresentable {
-    let activityController: UIActivityViewController
-
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        activityController
+        \(description)
+        """
     }
 
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+
+

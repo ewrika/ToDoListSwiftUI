@@ -161,9 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				E8DCDDD82D06434200F0D6CE /* fonts */,
-				E8DCDDFB2D06F7DC00F0D6CE /* SFProText-Bold.ttf */,
-				E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */,
-				E8DCDDFA2D06F7DC00F0D6CE /* SFProText-Regular.ttf */,
 				E8DCDDED2D06E43100F0D6CE /* Constants.swift */,
 				E8DCDDEF2D06E44E00F0D6CE /* Extensions.swift */,
 			);
@@ -173,6 +170,9 @@
 		E8DCDDD82D06434200F0D6CE /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E8DCDDFA2D06F7DC00F0D6CE /* SFProText-Regular.ttf */,
+				E8DCDDFC2D06F7DC00F0D6CE /* SFProText-Medium.ttf */,
+				E8DCDDFB2D06F7DC00F0D6CE /* SFProText-Bold.ttf */,
 			);
 			path = fonts;
 			sourceTree = "<group>";
