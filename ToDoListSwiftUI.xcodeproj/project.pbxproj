@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E8D9C0BF2D0A2117008B91D5 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D9C0BE2D0A2117008B91D5 /* TaskManager.swift */; };
 		E8DCDDC72D06429800F0D6CE /* ToDoListSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDDC62D06429800F0D6CE /* ToDoListSwiftUIApp.swift */; };
 		E8DCDDC92D06429800F0D6CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DCDDC82D06429800F0D6CE /* ContentView.swift */; };
 		E8DCDDCB2D06429A00F0D6CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8DCDDCA2D06429A00F0D6CE /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E8D9C0BE2D0A2117008B91D5 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		E8DCDDC32D06429800F0D6CE /* ToDoListSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DCDDC62D06429800F0D6CE /* ToDoListSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListSwiftUIApp.swift; sourceTree = "<group>"; };
 		E8DCDDC82D06429800F0D6CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				E8DCDE012D0723A900F0D6CE /* TaskViewModel.swift */,
+				E8D9C0BE2D0A2117008B91D5 /* TaskManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				E8DCDE022D0723A900F0D6CE /* TaskViewModel.swift in Sources */,
 				E8DCDDC92D06429800F0D6CE /* ContentView.swift in Sources */,
 				E8DCDDEA2D06E38B00F0D6CE /* ToDoItemView.swift in Sources */,
+				E8D9C0BF2D0A2117008B91D5 /* TaskManager.swift in Sources */,
 				E8DCDDC72D06429800F0D6CE /* ToDoListSwiftUIApp.swift in Sources */,
 				E8DCDE0D2D07391300F0D6CE /* ToDoNetworkService.swift in Sources */,
 				E8DCDDEC2D06E3FE00F0D6CE /* FooterView.swift in Sources */,

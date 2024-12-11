@@ -57,7 +57,7 @@ struct ToDoItemView: View {
             }
             Button {
                 print("Поделиться задачей")
-                shareTask()
+                
             } label: {
                 Label("Поделиться", systemImage: "square.and.arrow.up")
             }
@@ -89,12 +89,6 @@ struct ToDoItemView: View {
         await taskViewModel.deleteTask(task)
     }
 
-    private func shareTask() {
-        taskViewModel.shareTask(task) { activityController in
-            self.activityController = activityController
-            self.isSharing = true
-        }
-    }
 
 }
 

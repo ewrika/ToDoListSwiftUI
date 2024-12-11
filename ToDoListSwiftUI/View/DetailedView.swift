@@ -22,7 +22,7 @@ struct DetailedView: View {
                 .fontWeight(.bold)
                 .textFieldStyle(PlainTextFieldStyle())
 
-            Text("02/10/24")
+            Text(Date().formattedShort())
                 .font(.Regular12)
                 .foregroundColor(.gray)
 

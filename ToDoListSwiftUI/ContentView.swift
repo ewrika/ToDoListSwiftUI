@@ -16,7 +16,7 @@ struct ContentView: View {
     )
     private var tasks: FetchedResults<TaskItem>
     @Environment(\.managedObjectContext) private var viewContext
-
+    @StateObject private var viewModel = TaskViewModel(context: PersistenceController.shared.container.viewContext)
     @State private var searchText = ""
 
     var filteredTasks: [TaskItem] {
@@ -50,6 +50,10 @@ struct ContentView: View {
                     }
                 }
                 FooterView(taskCount: tasks.count)
+            }.onAppear{
+                Task{
+                    await viewModel.fetchTasks()
+                }
             }
             .navigationTitle("Задачи")
         }
